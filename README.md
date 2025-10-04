@@ -1,4 +1,4 @@
-# 🏋️‍♂️ SUPER SUPLIMENTOS - Loja Completa
+# 🏋️‍♂️ SUPER SUPLEMENTOS - Loja Completa
 
 Uma loja de suplementos profissional com MongoDB, HTTPS e sistema de pagamentos seguro.
 
