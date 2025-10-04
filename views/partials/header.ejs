@@ -1,0 +1,59 @@
+<header class="header">
+    <div class="header-top">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>🚚 Frete Grátis acima de R$ 199 | 📞 (11) 9999-9999</div>
+                <div>
+                    <a href="#" style="color: var(--white); text-decoration: none; margin-left: 15px;">Minha Conta</a>
+                    <a href="#" style="color: var(--white); text-decoration: none; margin-left: 15px;">Rastrear Pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">SUPER<span>SUPLEMENTOS</span></a>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar produtos..." id="searchInput">
+                </div>
+                
+                <div class="user-actions">
+                    <a href="#">
+                        <span>👤</span>
+                        Entrar
+                    </a>
+                    <a href="#">
+                        <span>❤️</span>
+                        Favoritos
+                    </a>
+                    <a href="#">
+                        <span>🛒</span>
+                        Carrinho (0)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/produtos">Todos os Produtos</a></li>
+                <% categorias.forEach(categoria => { %>
+                    <li>
+                        <a href="/produtos?categoria=<%= categoria %>">
+                            <%= categoria.charAt(0).toUpperCase() + categoria.slice(1) %>
+                        </a>
+                    </li>
+                <% }); %>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Lançamentos</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

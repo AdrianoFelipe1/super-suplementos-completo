@@ -1,0 +1,17 @@
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; color:#000; }
+.header, .footer { background:#000; color:#fff; padding:20px; text-align:center; }
+nav a { color:#fff; margin:0 10px; text-decoration:none; font-weight:600; }
+.container { max-width:1200px; margin:0 auto; padding:0 20px; }
+.section { padding:50px 0; }
+.grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.card { border:1px solid #ccc; padding:20px; text-align:center; border-radius:8px; }
+.card img { width:100%; max-height:150px; object-fit:cover; border-radius:8px; }
+.btn { display:inline-block; padding:10px 20px; background:#000; color:#fff; text-decoration:none; border-radius:5px; margin-top:10px; }
+.produto-detalhes { display:flex; gap:30px; flex-wrap:wrap; }
+.produto-detalhes img { max-width:300px; border-radius:10px; }
+.payment-box { border:1px solid #ccc; padding:20px; border-radius:8px; max-width:400px; }
+.form-group { margin-bottom:15px; }
+.form-group input, .form-group select { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; }
+.secure-badge { background:#4caf50; color:#fff; padding:10px; border-radius:5px; margin-bottom:15px; }
+.insecure-badge { background:#f44336; color:#fff; padding:10px; border-radius:5px; margin-bottom:15px; }

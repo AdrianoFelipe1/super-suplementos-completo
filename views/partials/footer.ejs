@@ -1,0 +1,58 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SUPER SUPLEMENTOS</h3>
+                <p style="color: var(--light); line-height: 1.6;">
+                    A maior loja de suplementos do Brasil. Oferecemos os melhores produtos 
+                    com garantia de qualidade e os preços mais competitivos do mercado.
+                </p>
+                <div style="margin-top: 20px; display: flex; gap: 15px;">
+                    <span style="background: var(--primary); color: var(--dark); padding: 10px; border-radius: 5px; font-size: 20px;">📱</span>
+                    <span style="background: var(--primary); color: var(--dark); padding: 10px; border-radius: 5px; font-size: 20px;">📷</span>
+                    <span style="background: var(--primary); color: var(--dark); padding: 10px; border-radius: 5px; font-size: 20px;">📘</span>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>PRODUTOS</h3>
+                <ul class="footer-links">
+                    <% categorias.forEach(categoria => { %>
+                        <li>
+                            <a href="/produtos?categoria=<%= categoria %>">
+                                <%= categoria.charAt(0).toUpperCase() + categoria.slice(1) %>
+                            </a>
+                        </li>
+                    <% }); %>
+                    <li><a href="#">Ofertas Especiais</a></li>
+                    <li><a href="#">Kits Promocionais</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ATENDIMENTO</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Central de Ajuda</a></li>
+                    <li><a href="#">Como Comprar</a></li>
+                    <li><a href="#">Formas de Pagamento</a></li>
+                    <li><a href="#">Política de Entrega</a></li>
+                    <li><a href="#">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>CONTATO</h3>
+                <div style="color: var(--light);">
+                    <p>📞 (11) 9999-9999</p>
+                    <p>✉️ contato@supersuplementos.com.br</p>
+                    <p>🕒 Seg à Sex: 8h às 18h</p>
+                    <p>📍 São Paulo - SP</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Super Suplementos. Todos os direitos reservados. CNPJ: 12.345.678/0001-90</p>
+        </div>
+    </div>
+</footer>

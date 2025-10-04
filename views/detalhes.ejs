@@ -1,0 +1,130 @@
+<%
+let content = '';
+
+if (produto) {
+    const emojis = { 
+        proteina: '💪', 
+        creatina: '⚡', 
+        'pre-treino': '🏃', 
+        aminoacidos: '🧬', 
+        vitaminas: '💊', 
+        termogenicos: '🔥'
+    };
+
+    content = `
+    <section class="section">
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <a href="/produtos" style="color: var(--gray); text-decoration: none;">← Voltar para produtos</a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 50px;">
+                <div>
+                    <div style="background: var(--light); border-radius: 15px; padding: 40px; text-align: center; font-size: 120px;">
+                        ${emojis[produto.categoria] || '📦'}
+                    </div>
+                </div>
+
+                <div>
+                    <h1 style="font-size: 32px; margin-bottom: 10px;">${produto.nome}</h1>
+                    <p style="color: var(--gray); font-size: 18px; margin-bottom: 20px;">por ${produto.marca}</p>
+                    
+                    <div style="background: var(--primary); color: var(--dark); padding: 5px 15px; border-radius: 5px; 
+                                display: inline-block; font-weight: bold; margin-bottom: 20px;">
+                        ${produto.categoria.charAt(0).toUpperCase() + produto.categoria.slice(1)}
+                    </div>
+
+                    <div style="font-size: 42px; font-weight: bold; margin-bottom: 20px;">
+                        R$ ${produto.preco.toFixed(2).replace('.', ',')}
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <p style="color: ${produto.estoque > 0 ? '#27ae60' : '#e74c3c'}; font-size: 16px; margin-bottom: 10px;">
+                            ${produto.estoque > 0 ? '✅ Em estoque' : '❌ Produto esgotado'}
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-bottom: 30px;">
+                        <a href="/checkout" class="btn" style="flex: 2;" ${produto.estoque === 0 ? 'style="background: var(--gray);"' : ''}>
+                            COMPRAR AGORA
+                        </a>
+                        <button class="btn" style="flex: 1; background: var(--gray);">
+                            ❤️
+                        </button>
+                    </div>
+
+                    <div style="background: var(--light); padding: 20px; border-radius: 10px;">
+                        <h3 style="margin-bottom: 15px;">🚚 Entrega Rápida</h3>
+                        <ul style="color: var(--gray); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 8px;">✅ Frete grátis acima de R$ 199</li>
+                            <li style="margin-bottom: 8px;">✅ Entrega para todo Brasil</li>
+                            <li style="margin-bottom: 8px;">✅ Produto 100% original</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 50px;">
+                <h2 style="font-size: 24px; margin-bottom: 20px;">📋 Descrição do Produto</h2>
+                <div style="background: var(--light); padding: 30px; border-radius: 10px;">
+                    <p style="line-height: 1.8;">${produto.descricao}</p>
+                </div>
+            </div>
+    `;
+
+    if (relacionados && relacionados.length > 0) {
+        content += `
+            <div>
+                <h2 class="section-title">PRODUTOS RELACIONADOS</h2>
+                <div class="products-grid">
+        `;
+        
+        relacionados.forEach(prod => {
+            content += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            ${emojis[prod.categoria] || '📦'}
+                        </div>
+                        <h3 class="product-name">${prod.nome}</h3>
+                        <p class="product-brand">${prod.marca}</p>
+                        <div class="product-price">R$ ${prod.preco.toFixed(2).replace('.', ',')}</div>
+                        <div class="product-actions">
+                            <a href="/produto/${prod._id}" class="btn btn-small">VER DETALHES</a>
+                            <button class="btn btn-small" style="background: var(--gray);">🛒</button>
+                        </div>
+                    </div>
+            `;
+        });
+        
+        content += `
+                </div>
+            </div>
+        `;
+    }
+
+    content += `
+        </div>
+    </section>
+    `;
+} else {
+    content = `
+    <section class="section">
+        <div class="container">
+            <div style="text-align: center; padding: 80px 20px;">
+                <div style="font-size: 120px; margin-bottom: 30px;">😞</div>
+                <h1 style="font-size: 48px; margin-bottom: 20px;">Produto Não Encontrado</h1>
+                <p style="font-size: 18px; color: var(--gray); margin-bottom: 40px;">
+                    O produto que você está procurando não existe ou foi removido.
+                </p>
+                <a href="/produtos" class="btn">VOLTAR PARA PRODUTOS</a>
+            </div>
+        </div>
+    </section>
+    `;
+}
+%>
+
+<%- include('layout', { 
+    title: produto ? produto.nome + ' | Super Suplementos' : 'Produto Não Encontrado',
+    content: content 
+}) %>

@@ -1,0 +1,111 @@
+<%
+let content = `
+<section class="section">
+    <div class="container">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <h1 style="text-align: center; margin-bottom: 30px;">💳 Finalizar Compra</h1>
+            
+            ${isSecure ? 
+                '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">🔒 Conexão Segura - HTTPS Ativo</div>' :
+                '<div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">⚠️ Conexão Não Segura - Use HTTPS</div>'
+            }
+
+            <div style="background: var(--light); padding: 30px; border-radius: 10px;">
+                <h3 style="margin-bottom: 20px;">Dados de Pagamento</h3>
+                
+                <form id="paymentForm">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Número do Cartão</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required
+                               style="width: 100%; padding: 12px; border: 1px solid var(--gray); border-radius: 5px;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold;">Validade</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" required
+                                   style="width: 100%; padding: 12px; border: 1px solid var(--gray); border-radius: 5px;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: bold;">CVV</label>
+                            <input type="text" id="cardCvv" placeholder="123" maxlength="3" required
+                                   style="width: 100%; padding: 12px; border: 1px solid var(--gray); border-radius: 5px;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nome no Cartão</label>
+                        <input type="text" id="cardName" placeholder="SEU NOME AQUI" required
+                               style="width: 100%; padding: 12px; border: 1px solid var(--gray); border-radius: 5px;">
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Parcelas</label>
+                        <select id="installments" style="width: 100%; padding: 12px; border: 1px solid var(--gray); border-radius: 5px;">
+                            <option>1x R$ 129,90 sem juros</option>
+                            <option>2x R$ 64,95 sem juros</option>
+                            <option>3x R$ 43,30 sem juros</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn" ${!isSecure ? 'disabled style="background: var(--gray);"' : ''}>
+                        ${isSecure ? '🔒 FINALIZAR PAGAMENTO' : '⚠️ USE HTTPS'}
+                    </button>
+                </form>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center; color: var(--gray);">
+                <p>💰 Pagamento 100% seguro</p>
+                <p>🔒 Seus dados estão protegidos</p>
+                <p>✅ Ambiente seguro</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const isSecure = ${isSecure};
+    const submitBtn = document.getElementById('submitBtn');
+    
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!isSecure) {
+            alert('⚠️ Use HTTPS para pagamentos seguros');
+            return;
+        }
+
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '🔐 PROCESSANDO...';
+        submitBtn.disabled = true;
+
+        // Simula pagamento
+        setTimeout(() => {
+            alert('✅ Pagamento realizado com sucesso!');
+            window.location.href = '/';
+        }, 2000);
+    });
+
+    // Formatação do cartão
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\\D/g, '');
+        value = value.replace(/(\\d{4})/g, '$1 ').trim();
+        e.target.value = value.substring(0, 19);
+    });
+
+    // Formatação da data
+    document.getElementById('cardExpiry').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\\D/g, '');
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value.substring(0, 5);
+    });
+</script>
+`;
+%>
+
+<%- include('layout', { 
+    title: 'Finalizar Compra - Super Suplementos',
+    content: content 
+}) %>

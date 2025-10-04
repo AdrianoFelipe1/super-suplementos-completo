@@ -1,0 +1,24 @@
+<%
+let content = `
+<section class="section">
+    <div class="container">
+        <div style="text-align: center; padding: 80px 20px;">
+            <div style="font-size: 120px; margin-bottom: 30px;">😞</div>
+            <h1 style="font-size: 48px; margin-bottom: 20px;">Página Não Encontrada</h1>
+            <p style="font-size: 18px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin: 0 auto 40px;">
+                A página que você está procurando não existe ou foi movida.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="/" class="btn">🏠 VOLTAR PARA HOME</a>
+                <a href="/produtos" class="btn" style="background: var(--gray);">🛍️ VER PRODUTOS</a>
+            </div>
+        </div>
+    </div>
+</section>
+`;
+%>
+
+<%- include('layout', { 
+    title: 'Página Não Encontrada | Super Suplementos',
+    content: content 
+}) %>

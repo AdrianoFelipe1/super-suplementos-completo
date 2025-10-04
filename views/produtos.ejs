@@ -1,0 +1,105 @@
+<%
+let content = `
+<section class="section">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h1 class="section-title" style="margin: 0;">
+                ${categoria && categoria !== 'todos' ? categoria.charAt(0).toUpperCase() + categoria.slice(1) : 'TODOS OS PRODUTOS'}
+            </h1>
+            <div style="color: var(--gray);">
+                ${produtos ? produtos.length : 0} produto(s) encontrado(s)
+            </div>
+        </div>
+
+        <div style="background: var(--light); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <strong>Filtrar por:</strong>
+                <a href="/produtos" 
+                   style="padding: 8px 16px; background: ${categoria === 'todos' || !categoria ? 'var(--primary)' : 'transparent'}; 
+                          color: ${categoria === 'todos' || !categoria ? 'var(--dark)' : 'var(--gray)'}; 
+                          border: 1px solid var(--gray); border-radius: 5px; text-decoration: none;">
+                    Todos
+                </a>
+`;
+
+categorias.forEach(function(cat) {
+    content += `
+                <a href="/produtos?categoria=${cat}" 
+                   style="padding: 8px 16px; background: ${categoria === cat ? 'var(--primary)' : 'transparent'}; 
+                          color: ${categoria === cat ? 'var(--dark)' : 'var(--gray)'}; 
+                          border: 1px solid var(--gray); border-radius: 5px; text-decoration: none;">
+                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </a>
+    `;
+});
+
+content += `
+            </div>
+        </div>
+`;
+
+if (produtos && produtos.length > 0) {
+    content += `
+        <div class="products-grid">
+    `;
+    
+    produtos.forEach(function(produto) {
+        const emojis = { 
+            proteina: '💪', 
+            creatina: '⚡', 
+            'pre-treino': '🏃', 
+            aminoacidos: '🧬', 
+            vitaminas: '💊', 
+            termogenicos: '🔥'
+        };
+        
+        const emoji = emojis[produto.categoria] || '📦';
+        const estoqueCor = produto.estoque > 0 ? '#27ae60' : '#e74c3c';
+        const estoqueTexto = produto.estoque > 0 ? '✅ Em estoque' : '❌ Fora de estoque';
+        const botaoDisabled = produto.estoque === 0 ? 'disabled' : '';
+        
+        content += `
+            <div class="product-card">
+                <div class="product-image">
+                    ${emoji}
+                </div>
+                <h3 class="product-name">${produto.nome}</h3>
+                <p class="product-brand">${produto.marca}</p>
+                <div class="product-price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</div>
+                <p style="color: ${estoqueCor}; margin-bottom: 15px;">
+                    ${estoqueTexto}
+                </p>
+                <div class="product-actions">
+                    <a href="/produto/${produto._id}" class="btn btn-small">VER DETALHES</a>
+                    <button class="btn btn-small" style="background: var(--gray);" ${botaoDisabled}>🛒</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    content += `
+        </div>
+    `;
+} else {
+    content += `
+        <div style="text-align: center; padding: 80px 20px;">
+            <div style="font-size: 120px; margin-bottom: 30px;">😕</div>
+            <h2 style="color: var(--gray); margin-bottom: 15px;">Nenhum produto encontrado</h2>
+            <p style="color: var(--gray); margin-bottom: 30px;">
+                Tente alterar os filtros ou voltar para a página inicial.
+            </p>
+            <a href="/" class="btn">VOLTAR PARA HOME</a>
+        </div>
+    `;
+}
+
+content += `
+    </div>
+</section>
+`;
+%>
+
+<%- include('layout', { 
+    title: 'Produtos | Super Suplementos',
+    content: content 
+}) %>

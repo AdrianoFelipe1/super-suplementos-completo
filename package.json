@@ -1,0 +1,29 @@
+{
+  "name": "super-suplementos",
+  "version": "1.0.0",
+  "description": "Loja profissional de suplementos com MongoDB e HTTPS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "generate-cert": "node generate-cert.js",
+    "setup": "npm install && node generate-cert.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^6.8.0",
+    "ejs": "^3.1.9",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "dotenv": "^16.3.1",
+    "selfsigned": "^2.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": ["suplementos", "ecommerce", "mongodb", "https", "nodejs"],
+  "author": "Super Suplementos",
+  "license": "MIT"
+}

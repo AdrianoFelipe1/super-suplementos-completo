@@ -1,0 +1,93 @@
+<%
+let content = `
+<section class="hero">
+    <div class="container">
+        <h1>SUA MELHOR VERSÃO COMEÇA AQUI</h1>
+        <p>Os melhores suplementos com preços imbatíveis e qualidade garantida</p>
+        <a href="/produtos" class="btn">VER TODOS OS PRODUTOS</a>
+    </div>
+</section>
+
+<section class="section" style="background: var(--light);">
+    <div class="container">
+        <h2 class="section-title">🔥 PRODUTOS EM DESTAQUE</h2>
+        <div class="products-grid">
+`
+
+if (produtos && produtos.length > 0) {
+    produtos.forEach(produto => {
+        const emojis = { 
+            proteina: '💪', 
+            creatina: '⚡', 
+            'pre-treino': '🏃', 
+            aminoacidos: '🧬', 
+            vitaminas: '💊', 
+            termogenicos: '🔥'
+        };
+        
+        content += `
+            <div class="product-card">
+                <div class="product-image">
+                    ${emojis[produto.categoria] || '📦'}
+                </div>
+                <h3 class="product-name">${produto.nome}</h3>
+                <p class="product-brand">${produto.marca}</p>
+                <div class="product-price">R$ ${produto.preco.toFixed(2).replace('.', ',')}</div>
+                <div class="product-actions">
+                    <a href="/produto/${produto._id}" class="btn btn-small">VER DETALHES</a>
+                    <button class="btn btn-small" style="background: var(--gray);">🛒</button>
+                </div>
+            </div>
+        `;
+    });
+} else {
+    content += `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <div style="font-size: 64px; margin-bottom: 20px;">🏋️‍♂️</div>
+            <h3>Bem-vindo à Super Suplementos!</h3>
+            <p>Navegue pelos nossos produtos incríveis.</p>
+        </div>
+    `;
+}
+
+content += `
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 36px; margin-bottom: 20px;">PORQUE ESCOLHER A SUPER SUPLEMENTOS?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🚚</div>
+                    <h3 style="margin-bottom: 10px;">Frete Grátis</h3>
+                    <p style="color: var(--gray);">Acima de R$ 199 para todo Brasil</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🏷️</div>
+                    <h3 style="margin-bottom: 10px;">Melhor Preço</h3>
+                    <p style="color: var(--gray);">Garantia do menor preço</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">✅</div>
+                    <h3 style="margin-bottom: 10px;">Qualidade</h3>
+                    <p style="color: var(--gray);">Produtos 100% originais</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">📞</div>
+                    <h3 style="margin-bottom: 10px;">Suporte</h3>
+                    <p style="color: var(--gray);">Atendimento especializado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+`;
+%>
+
+<%- include('layout', { 
+    title: 'Super Suplementos - Loja Oficial',
+    content: content 
+}) %>
