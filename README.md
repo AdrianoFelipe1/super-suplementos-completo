@@ -1,4 +1,5 @@
-# 🏋️‍♂️ SUPER SUPLEMENTOS - Loja Completa - **EM DESENVOLVIMENTO
+# 🏋️‍♂️ SUPER SUPLEMENTOS - Loja Completa - 
+*EM DESENVOLVIMENTO
 
 Uma loja de suplementos profissional com MongoDB, HTTPS e sistema de pagamentos seguro.
 
